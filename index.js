@@ -5,6 +5,7 @@ const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const Manager = require('./lib/Manager');
 const { ChildProcess } = require('child_process');
+const generateHTML = require('./src/generateHTML');
 const employeeStore = [];
 const employeeCardStore = ``;
 
@@ -28,12 +29,53 @@ const employeeCardStore = ``;
     //call fs.writeFile() after the for loop
     //ensure classes are present in HTML template and in cards (bootstrap)
 
+    const generateTemplate = async (employeeStore) => {
+        for (let i = 0; i < employeeStore.length; i++) {
+            const cardTemplate = `
+            <div class="col">
+                <div class="p-3 bg-primary text-white">
+                    <div class="text-white">${employeeStore[i].name}</div>
+                    <div class="text-white">${employeeStore[i].role}</div>
+                </div>
+                <div>
+                    <div class="p-3 border bg-light">ID: ${employeeStore[i].id}</div>
+                    <div class="p-3 border bg-light">Email: ${employeeStore[i].email}</div>
+                    <div class="p-3 border bg-light">
+                    ${
+                        (() => {
+                            if (employeeStore[i].officeNumber) {
+                                return 'Office Number: ';
+                            } else if (employeeStore[i].github) {
+                                return 'GitHub: ';
+                            } else if (employeeStore[i].school) {
+                                return 'School: ';
+                            }
+                        })
+                    }
+    
+                    ${
+                        (() => {
+                            if (employeeStore[i].officeNumber) {
+                                return employeeStore[i].officeNumber;
+                            } else if (employeeStore[i].github) {
+                                return employeeStore[i].github;
+                            } else if (employeeStore[i].school) {
+                                return employeeStore[i].school;
+                            }
+                        })
+                    }
+                    </div>
+                </div>
+              </div>
+            `
 
-const generateTemplate = async () => {
-    for (let i = 0; i < employeeStore.length; i++) {
-        //TODO: write template
+            employeeCardStore.concat(" ", cardTemplate);
+        }
+        fs.writeFile('./dist/index.html', generateHTML(employeeCardStore), err => 
+            err ? console.log(err) : console.log('Success! Go to the dist folder to see your completed index.html file.')
+        );
     }
-}
+
 
 const managerInformationPrompt = async () => {
     const prompt = [
@@ -115,7 +157,7 @@ const employeeInformationPrompt = async () => {
         if (answer.addEmployee === true) {
             employeeInformationPrompt();
         } else {
-            //use employeeStore to make template
+            generateTemplate(employeeStore);
             console.log('finish');
         }
     }
@@ -136,7 +178,7 @@ const employeeInformationPrompt = async () => {
         if (answer.addEmployee === true) {
             employeeInformationPrompt();
         } else {
-            //use employeeStore to make template
+            generateTemplate(employeeStore);
             console.log('finish');
         }
     }
@@ -157,7 +199,7 @@ const employeeInformationPrompt = async () => {
         if (answer.addEmployee === true) {
             employeeInformationPrompt();
         } else {
-            //use employeeStore to make template
+            generateTemplate(employeeStore);
             console.log('finish');
         }
     }
@@ -180,3 +222,4 @@ const initApp = async() => {
 }
 
 initApp();
+
