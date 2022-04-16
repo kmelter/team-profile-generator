@@ -7,7 +7,7 @@ const Manager = require('./lib/Manager');
 const { ChildProcess } = require('child_process');
 const generateHTML = require('./src/generateHTML');
 const employeeStore = [];
-const employeeCardStore = ``;
+let employeeCardStore = ``;
 
 //prompt user for team information
     //ask for generic user information (ie. name, etc)
@@ -31,7 +31,7 @@ const employeeCardStore = ``;
 
     const generateTemplate = async (employeeStore) => {
         for (let i = 0; i < employeeStore.length; i++) {
-            const cardTemplate = `
+            let cardTemplate = `
             <div class="col">
                 <div class="p-3 bg-primary text-white">
                     <div class="text-white">${employeeStore[i].name}</div>
@@ -69,9 +69,10 @@ const employeeCardStore = ``;
               </div>
             `
 
-            employeeCardStore.concat(" ", cardTemplate);
+            employeeCardStore = employeeCardStore.concat(` `, cardTemplate);
         }
-        fs.writeFile('./dist/index.html', generateHTML(employeeCardStore), err => 
+
+        fs.writeFile('./dist/index.html', await generateHTML(employeeCardStore), err => 
             err ? console.log(err) : console.log('Success! Go to the dist folder to see your completed index.html file.')
         );
     }
@@ -206,9 +207,7 @@ const employeeInformationPrompt = async () => {
     return answers;
 }
 
-const addEmployeePrompt = async () => {
 
-}
 
 const initApp = async() => {
     employeeInformationPrompt();

@@ -1,4 +1,4 @@
-function generateHTML(employeeCardStore) {
+const generateHTML = async (employeeCardStore) => {
     return `
 <!DOCTYPE html>
 <html lang="en">
