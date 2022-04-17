@@ -10,8 +10,10 @@ JavaScript
 Inquirer
 fs
 Jest
+Bootstrap
 
 ## Repository Link
 https://github.com/kmelter/team-profile-generator
 
 ## Link to Video Demonstration
+https://youtu.be/6JewiO_i9FA
