@@ -7,6 +7,7 @@ const Manager = require('./lib/Manager');
 const { ChildProcess } = require('child_process');
 const generateHTML = require('./src/generateHTML');
 const employeeStore = [];
+const roleStore = [];
 let employeeCardStore = ``;
 
 //prompt user for team information
@@ -40,31 +41,7 @@ let employeeCardStore = ``;
                 <div>
                     <div class="p-3 border bg-light">ID: ${employeeStore[i].id}</div>
                     <div class="p-3 border bg-light">Email: ${employeeStore[i].email}</div>
-                    <div class="p-3 border bg-light">
-                    ${
-                        (() => {
-                            if (employeeStore[i].officeNumber) {
-                                return 'Office Number: ';
-                            } else if (employeeStore[i].github) {
-                                return 'GitHub: ';
-                            } else if (employeeStore[i].school) {
-                                return 'School: ';
-                            }
-                        })
-                    }
-    
-                    ${
-                        (() => {
-                            if (employeeStore[i].officeNumber) {
-                                return employeeStore[i].officeNumber;
-                            } else if (employeeStore[i].github) {
-                                return employeeStore[i].github;
-                            } else if (employeeStore[i].school) {
-                                return employeeStore[i].school;
-                            }
-                        })
-                    }
-                    </div>
+                    <div class="p-3 border bg-light">${roleStore[i]}</div>
                 </div>
               </div>
             `
@@ -146,6 +123,9 @@ const employeeInformationPrompt = async () => {
         let newManager = new Manager(answers, managerInput);
         employeeStore.push(newManager);
         console.log(employeeStore);
+
+        let managerTemp = `<div>Office Number: ${employeeStore[employeeStore.length - 1].officeNumber}</div>`;
+        roleStore.push(managerTemp);
         
         const prompt = [
             {
@@ -168,6 +148,9 @@ const employeeInformationPrompt = async () => {
         employeeStore.push(newIntern);
         console.log(employeeStore);
 
+        let internTemp = `<div>School: ${employeeStore[employeeStore.length - 1].school}</div>`;
+        roleStore.push(internTemp);
+
         const prompt = [
             {
                 type: 'confirm',
@@ -188,6 +171,9 @@ const employeeInformationPrompt = async () => {
         let newEngineer = new Engineer(answers, engineerInput);
         employeeStore.push(newEngineer);
         console.log(employeeStore);
+
+        let engineerTemp = `<div>GitHub: ${employeeStore[employeeStore.length - 1].github}</div>`;
+        roleStore.push(engineerTemp);
 
         const prompt = [
             {
