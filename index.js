@@ -35,7 +35,7 @@ let employeeCardStore = ``;
             let cardTemplate = `
             <div class="col">
                 <div class="p-3 bg-primary text-white">
-                    <div class="text-white">${employeeStore[i].name}</div>
+                    <div class="text-white h5">${employeeStore[i].name}</div>
                     <div class="text-white">${employeeStore[i].role}</div>
                 </div>
                 <div>
@@ -167,7 +167,7 @@ const employeeInformationPrompt = async () => {
         let newEngineer = new Engineer(answers, engineerInput);
         employeeStore.push(newEngineer);
 
-        let engineerTemp = `<div>GitHub: ${employeeStore[employeeStore.length - 1].github}</div>`;
+        let engineerTemp = `<div class="d-inline">GitHub: </div> <a href="http://github.com/${employeeStore[employeeStore.length - 1].github}" target="_blank">${employeeStore[employeeStore.length - 1].github}</a>`;
         roleStore.push(engineerTemp);
 
         const prompt = [

@@ -13,7 +13,7 @@ const generateHTML = async (employeeCardStore) => {
   </head>
 
   <body>
-    <header class="bg-danger text-white">My Team</header>
+    <header class="bg-danger text-white text-center h3 p-2">My Team</header>
     <div class="container p-5">
         <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
             ${employeeCardStore}
