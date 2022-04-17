@@ -122,7 +122,6 @@ const employeeInformationPrompt = async () => {
         let managerInput = await managerInformationPrompt();
         let newManager = new Manager(answers, managerInput);
         employeeStore.push(newManager);
-        console.log(employeeStore);
 
         let managerTemp = `<div>Office Number: ${employeeStore[employeeStore.length - 1].officeNumber}</div>`;
         roleStore.push(managerTemp);
@@ -139,14 +138,12 @@ const employeeInformationPrompt = async () => {
             employeeInformationPrompt();
         } else {
             generateTemplate(employeeStore);
-            console.log('finish');
         }
     }
     else if (answers.userType === 'Intern') {
         let internInput = await internInformationPrompt();
         let newIntern = new Intern(answers, internInput);
         employeeStore.push(newIntern);
-        console.log(employeeStore);
 
         let internTemp = `<div>School: ${employeeStore[employeeStore.length - 1].school}</div>`;
         roleStore.push(internTemp);
@@ -163,14 +160,12 @@ const employeeInformationPrompt = async () => {
             employeeInformationPrompt();
         } else {
             generateTemplate(employeeStore);
-            console.log('finish');
         }
     }
     else if (answers.userType === 'Engineer') {
         let engineerInput = await engineerInformationPrompt();
         let newEngineer = new Engineer(answers, engineerInput);
         employeeStore.push(newEngineer);
-        console.log(employeeStore);
 
         let engineerTemp = `<div>GitHub: ${employeeStore[employeeStore.length - 1].github}</div>`;
         roleStore.push(engineerTemp);
@@ -187,7 +182,6 @@ const employeeInformationPrompt = async () => {
             employeeInformationPrompt();
         } else {
             generateTemplate(employeeStore);
-            console.log('finish');
         }
     }
     return answers;
@@ -196,6 +190,7 @@ const employeeInformationPrompt = async () => {
 
 
 const initApp = async() => {
+    console.log('Enter manager information:');
     employeeInformationPrompt();
     
     // let generalInformation = await employeeInformationPrompt();
